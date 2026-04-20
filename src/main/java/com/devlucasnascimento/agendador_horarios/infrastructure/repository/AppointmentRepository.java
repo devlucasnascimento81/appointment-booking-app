@@ -15,4 +15,6 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
     void deleteByDateTimeAppointmentAndClient(LocalDateTime dateTimeAppointment, String client);
 
     AppointmentEntity findByDateTimeAppointmentBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+
+    AppointmentEntity findByDateTimeAppointmentAndClient(LocalDateTime dateTimeAppointment, String client);
 }

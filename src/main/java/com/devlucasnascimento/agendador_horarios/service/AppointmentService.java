@@ -40,5 +40,16 @@ public class AppointmentService {
 
         return appointmentRepository.findByDateTimeAppointmentBetween(firstDayTime, lastDayTime);
     }
-    
+
+    public AppointmentEntity updateAppointment(AppointmentEntity appointment, String client, LocalDateTime dateTimeAppointment){
+        AppointmentEntity schedule = appointmentRepository.findByDateTimeAppointmentAndClient(dateTimeAppointment, client);
+
+        if (Objects.nonNull(schedule)) {
+            throw new RuntimeException("Horario não está preenchido");
+        }
+
+        schedule.setId(schedule.getId());
+        return appointmentRepository.save(appointment);
+    }
+
 }
