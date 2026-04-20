@@ -16,6 +16,7 @@ public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     public AppointmentEntity saveAppointment(AppointmentEntity appointment) {
+        //salva o agendamento, verificando se há disponibilidade...
 
         LocalDateTime appointmentTime = appointment.getDateTimeAppointment();
         LocalDateTime endTime = appointment.getDateTimeAppointment().plusHours(1);
@@ -30,11 +31,13 @@ public class AppointmentService {
         return appointmentRepository.save(scheduled);
     }
     public void deleteAppointment(LocalDateTime appointmentDateTime, String client){
+    // deleta os agendamentos pela data e hora do cliente.
 
       appointmentRepository.deleteByDateTimeAppointmentAndClient(appointmentDateTime, client);
     }
 
     public AppointmentEntity getDayAppointment(LocalDate date){
+        //busca agendamentos diário.
         LocalDateTime firstDayTime = date.atStartOfDay();
         LocalDateTime lastDayTime = date.atTime(23,59,59);
 
@@ -42,6 +45,7 @@ public class AppointmentService {
     }
 
     public AppointmentEntity updateAppointment(AppointmentEntity appointment, String client, LocalDateTime dateTimeAppointment){
+        //altera os agendamentos.
         AppointmentEntity schedule = appointmentRepository.findByDateTimeAppointmentAndClient(dateTimeAppointment, client);
 
         if (Objects.nonNull(schedule)) {
