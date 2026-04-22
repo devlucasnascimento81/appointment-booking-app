@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
+@RequestMapping("/appointments")
 @RequiredArgsConstructor
 public class AppointmentController {
 
@@ -38,3 +39,4 @@ public class AppointmentController {
         return ResponseEntity.accepted().body(appointmentService.updateAppointment(appointment,client,localDateTime));
     }
 }
+
